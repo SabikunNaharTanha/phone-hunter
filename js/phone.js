@@ -15,7 +15,7 @@ const searchPhone = () => {
         console.log(url);
         fetch(url)
             .then(res => res.json())
-            .then(data => displaySearchResult(data.status))     ///chges
+            .then(data => displaySearchResult(data.data))     ///chges
             .catch(error => displayError(error));
 
     }
@@ -24,7 +24,7 @@ const displayError = error => {
     document.getElementById('error-message').style.display = 'block';
 }
 const displaySearchResult = phones => {
-    // console.log(meals);
+    // console.log(phones);
     const searchResult = document.getElementById('search-result');
     // searchResult.innerHTML = '';
     searchResult.textContent = '';
@@ -36,14 +36,15 @@ const displaySearchResult = phones => {
         console.log(phone);
         const div = document.createElement('div');
         div.classList.add('col');
+        //onClick="loadPhoneDetail(${phone.slug})"
         div.innerHTML = `
-        <div onClick="loadMealDetail(${phone.status.data})" class="card">
-        <img src="${phone.strMealThumb}" class="card-img-top" alt="...">
+        <div class="card">
+        <img src="${phone.image}" class="card-img-top" alt="...">
         <div class="card-body">
-            <h5 class="card-title">${phone.strMeal}</h5>
-            <p class="card-text">${phone.strInstructions.slice(0, 200)}</p>
-            <button onclick="searchDetails()" class="btn btn-outline-secondary" type="button"
-            id="button-details">Details</button> 
+            <h5 class="card-title">${phone.brand}</h5>
+            <p class="card-text">${phone.phone_name}</p>
+            <button onclick="displayPhoneDetails()" class="btn btn-secondary" type="button"
+            >Details</button> 
         </div>
     </div>`;
         searchResult.appendChild(div);
@@ -51,27 +52,29 @@ const displaySearchResult = phones => {
 }
 
 //single phone ID
-const loadMealDetail = mealId => {
-    const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`;
+const loadPhoneDetail = slug => {
+    const url = `https://openapi.programming-hero.com/api/phone/${slug}`;
     fetch(url)
         .then(res => res.json())
-        .then(data => displayMealDetails(data.meals[0]));
-
+        .then(data => displayPhoneDetails(data.data[0]));
 }
 //single phone details
-const displayMealDetails = meal => {
-    console.log(meal);
-    const mealDetails = document.getElementById("meal-details");
-    mealDetails.textContent = '';
+const displayPhoneDetails = phone => {
+    console.log(phone);
+    const phoneDetails = document.getElementById("phone-details");
+    phoneDetails.textContent = '';
     const div = document.createElement('div');
     div.classList.add('card');
     div.innerHTML = `
-    <img src="${meal.strMealThumb}" class="card-img-top" alt="...">
+    <img src="${phone.image}" class="card-img-top" alt="...">
             <div class="card-body">
-                <h5 class="card-title">${meal.strMeal}</h5>
-                <p class="card-text">${meal.strMeal.slice(0, 200)}</p>
-                <a href="${meal.strYoutube}" class="btn btn-primary">Go somewhere</a>
+                <h5 class="card-title">${phone.brand}</h5>
+                <p class="card-text">${phone.phone_name}</p>
+                
             </div>
     `;
-    mealDetails.appendChild(div);
+    phoneDetails.appendChild(div);
 }
+
+
+{/* <a href="${phone.Prototype[hasOwnProperty]}" class="btn btn-primary">Go somewhere</a> */ }
