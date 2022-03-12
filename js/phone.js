@@ -66,12 +66,12 @@ const displayPhoneDetails = phone => {
     const div = document.createElement('div');
     div.classList.add('card');
     div.innerHTML = `
-    <img src="${phone.image}" class="card-img-top" alt="...">
+    <img src="${phone.image}" height='250px' width='200px' class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">${phone.brand}</h5>
                 <p class="card-text">${phone.phone_name}</p>
-                <span>${phone.releaseDate.length == 0 ? 'Released' : phone.releaseDate}</span>         
-            </div>
+                <span class="card-text" >${phone.releaseDate.length == 0 ? 'Released' : phone.releaseDate}</span>         
+            </div >
     `;
     phoneDetails.appendChild(div);
 }
