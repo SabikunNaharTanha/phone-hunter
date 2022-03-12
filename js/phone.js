@@ -15,7 +15,7 @@ const searchPhone = () => {
         console.log(url);
         fetch(url)
             .then(res => res.json())
-            .then(data => displaySearchResult(data.data[0]))     ///chges
+            .then(data => displaySearchResult(data.status))     ///chges
             .catch(error => displayError(error));
 
     }
@@ -32,18 +32,18 @@ const displaySearchResult = phones => {
         console.log('No results');
 
     }
-    phones.forEach(phone => {
-        // console.log(meal);
+    phones.forEach(phone => {              ///Changes from here
+        console.log(phone);
         const div = document.createElement('div');
         div.classList.add('col');
         div.innerHTML = `
-        <div onClick="loadMealDetail(${phone.idMeal})" class="card">
+        <div onClick="loadMealDetail(${phone.status.data})" class="card">
         <img src="${phone.strMealThumb}" class="card-img-top" alt="...">
         <div class="card-body">
             <h5 class="card-title">${phone.strMeal}</h5>
             <p class="card-text">${phone.strInstructions.slice(0, 200)}</p>
             <button onclick="searchDetails()" class="btn btn-outline-secondary" type="button"
-            id="button-details">Details</button>            //newly added
+            id="button-details">Details</button> 
         </div>
     </div>`;
         searchResult.appendChild(div);
