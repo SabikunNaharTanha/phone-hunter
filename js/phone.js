@@ -43,7 +43,7 @@ const displaySearchResult = phones => {
         <img src="${phone.image}" class="card-img-top" alt="...">
         <div class="card-body">
             <h5 class="card-title">${phone.brand}</h5>
-            <p class="card-text">${phone.phone_name}</p>
+            <p class="card-text">'${phone.phone_name}'</p>
             <button onclick="loadPhoneDetail('${phone.slug}')" class="btn btn-secondary">Details</button>
         </div>
     </div>`;
@@ -66,7 +66,7 @@ const displayPhoneDetails = phone => {
     const div = document.createElement('div');
     div.classList.add('card');
     div.innerHTML = `
-    <img src="${phone.image}" height='250px' width='200px' class="card-img-top" alt="...">
+    <img src="${phone.image}" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">${phone.brand}</h5>
                 <p class="card-text">${phone.phone_name}</p>
